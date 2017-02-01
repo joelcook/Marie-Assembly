@@ -1,0 +1,84 @@
+/Joel Cook 
+/CGS 3269   Computer Architecture Concepts
+/multiply numbers via subroutine
+
+org 0100
+  INPUT a
+  OUTPUT a
+  STORE a
+  INPUT b
+  OUTPUT b
+  STORE b
+  INPUT c
+  OUTPUT c
+  STORE c
+  INPUT d
+  OUTPUT d
+  STORE d
+
+  LOAD a
+  SKIPCOND 800
+JUMP end /skip to end if a is zero
+
+  LOAD b
+  SKIPCOND 800
+JUMP end  /skip to end if b is zero
+
+  LOAD c
+  SKIPCOND 800
+JUMP end /skip to end if c is zero
+
+  LOAD d
+  SKIPCOND 800
+JUMP end /skip to end if d is zero
+
+  LOAD a
+  STORE arg1
+  LOAD b
+  STORE arg2
+  JNS MultiSub
+  LOAD return
+  STORE z
+  LOAD c
+  STORE arg1
+  LOAD d
+  STORE arg2
+  JNS MultiSub
+  LOAD return
+  STORE x
+  LOAD x
+  STORE arg1
+  LOAD z
+  STORE arg2
+  JNS MultiSub
+  LOAD return
+  STORE multiply
+end,	LOAD multiply 
+	OUTPUT multiply
+	HALT
+
+a, Dec 0
+b, Dec 0
+c, Dec 0
+d, Dec 0
+one, Dec 1
+x, Dec 0
+z, Dec 0	
+multiply, Dec 0 /final sum
+/  Subroutine variables 
+arg1,  Dec 0 /Multiply subroutine argument 1
+arg2,  Dec 0 /Multiply subroutine argument 2
+return,  Dec 0 /Multiply subroutine return value
+/  Subroutine 
+MultiSub,  Dec 0 /Multiply subroutine
+  CLEAR
+  STORE return
+multiLoop, LOAD arg1
+  ADD  return
+  STORE return
+  LOAD arg2
+  SUBT one
+  STORE arg2
+  SKIPCOND 400
+Jump multiLoop
+  JumpI MultiSub
