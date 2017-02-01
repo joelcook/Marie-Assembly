@@ -1,6 +1,5 @@
 /* Joel Cook
     7/25/2016
-    assignment 3
     computer arch
 */
 
